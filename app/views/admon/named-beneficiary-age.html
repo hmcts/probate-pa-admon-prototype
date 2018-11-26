@@ -1,0 +1,28 @@
+{% extends "question_no_sign_out.html" %}
+
+{% set question = "Are all the beneficiaries over 18?" %}
+
+{% block question %}
+{{ question }}
+{% endblock %}
+
+
+
+{% block form %}
+<p>Text</p>
+<p>Text</p>
+<div class="form-group">
+  <fieldset class="inline">
+    <legend class="visually-hidden">{{ question }}</legend>
+    <div class="multiple-choice">
+      <input id="namedBeneficiaryAgeYes" type="radio" name="namedBeneficiaryAge" value="Yes" {{ data['namedBeneficiaryAge'] | checkedIf('Yes') }}>
+      <label for="namedBeneficiaryAgeYes">Yes</label>
+    </div>
+    <div class="multiple-choice">
+      <input id="namedBeneficiaryAgeNo" type="radio" name="namedBeneficiaryAge" value="No" {{ data['namedBeneficiaryAge'] | checkedIf('No') }}>
+      <label for="namedBeneficiaryAgeNo">No</label>
+    </div>
+  </fieldset>
+</div>
+
+{% endblock %}

@@ -37,7 +37,7 @@ module.exports = function (router) {
     if (req.body.haveOriginalWill === 'Yes') {
       res.redirect('applicant-executor')
     } else {
-      res.redirect('/stop-page/not-original')
+      res.redirect('https://probate-intestacy-prototype.herokuapp.com/screening-questions/die-after-october-2014')
     }
   })
 
@@ -45,7 +45,7 @@ module.exports = function (router) {
     if (req.body.applicantIsExecutor === 'Yes') {
       res.redirect('mental-incapacity')
     } else {
-      res.redirect('/stop-page/not-executor')
+      res.redirect('/admon/executors-not-applying')
     }
   })
 

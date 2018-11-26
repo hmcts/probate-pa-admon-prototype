@@ -1,0 +1,27 @@
+{% extends "question_no_sign_out.html" %}
+
+{% set question = "Are you planning to make a joint application with someone else?" %}
+
+{% block question %}
+{{ question }}
+{% endblock %}
+
+
+
+{% block form %}
+<p>You may want to apply with someone in your family, for example your sister or brother.</p>
+<div class="form-group">
+  <fieldset class="inline">
+    <legend class="visually-hidden">{{ question }}</legend>
+    <div class="multiple-choice">
+      <input id="jointApplicationYes" type="radio" name="jointApplication" value="Yes" {{ data['jointApplication'] | checkedIf('Yes') }}>
+      <label for="jointApplicationYes">Yes</label>
+    </div>
+    <div class="multiple-choice">
+      <input id="jointApplicationNo" type="radio" name="jointApplication" value="No" {{ data['jointApplication'] | checkedIf('No') }}>
+      <label for="jointApplicationNo">No</label>
+    </div>
+  </fieldset>
+</div>
+
+{% endblock %}

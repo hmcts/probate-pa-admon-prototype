@@ -1,0 +1,28 @@
+{% extends "question_no_sign_out.html" %}
+
+{% set question = "Do any of the beneficiaries have a life interest?" %}
+
+{% block question %}
+{{ question }}
+{% endblock %}
+
+
+
+{% block form %}
+<p>Text</p>
+<p>Text</p>
+<div class="form-group">
+  <fieldset class="inline">
+    <legend class="visually-hidden">{{ question }}</legend>
+    <div class="multiple-choice">
+      <input id="lifeInterestYes" type="radio" name="lifeInterest" value="Yes" {{ data['lifeInterest'] | checkedIf('Yes') }}>
+      <label for="lifeInterestYes">Yes</label>
+    </div>
+    <div class="multiple-choice">
+      <input id="lifeInterestNo" type="radio" name="lifeInterest" value="No" {{ data['lifeInterest'] | checkedIf('No') }}>
+      <label for="lifeInterestNo">No</label>
+    </div>
+  </fieldset>
+</div>
+
+{% endblock %}

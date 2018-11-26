@@ -1,0 +1,28 @@
+{% extends "question_no_sign_out.html" %}
+
+{% set question = "Have all the executors died or chosen not to apply?" %}
+
+{% block question %}
+{{ question }}
+{% endblock %}
+
+
+
+{% block form %}
+<p>Text</p>
+<p>Text</p>
+<div class="form-group">
+  <fieldset class="inline">
+    <legend class="visually-hidden">{{ question }}</legend>
+    <div class="multiple-choice">
+      <input id="executorNotApplyingYes" type="radio" name="executorNotApplying" value="Yes" {{ data['executorNotApplying'] | checkedIf('Yes') }}>
+      <label for="executorNotApplyingYes">Yes</label>
+    </div>
+    <div class="multiple-choice">
+      <input id="executorNotApplyingNo" type="radio" name="executorNotApplying" value="No" {{ data['executorNotApplying'] | checkedIf('No') }}>
+      <label for="executorNotApplyingNo">No</label>
+    </div>
+  </fieldset>
+</div>
+
+{% endblock %}

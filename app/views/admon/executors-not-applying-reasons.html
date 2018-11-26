@@ -1,0 +1,28 @@
+{% extends "question_no_sign_out.html" %}
+
+{% set question = "Executors reasons?" %}
+
+{% block question %}
+{{ question }}
+{% endblock %}
+
+
+
+{% block form %}
+<p>Text</p>
+<p>Text</p>
+<div class="form-group">
+  <fieldset class="inline">
+    <legend class="visually-hidden">{{ question }}</legend>
+    <div class="multiple-choice">
+      <input id="executorNotApplyingReasonsYes" type="radio" name="executorNotApplyingReasons" value="Yes" {{ data['executorNotApplyingReasons'] | checkedIf('Yes') }}>
+      <label for="executorNotApplyingReasonsYes">Yes</label>
+    </div>
+    <div class="multiple-choice">
+      <input id="executorNotApplyingReasonsNo" type="radio" name="executorNotApplyingReasons" value="No" {{ data['executorNotApplyingReasons'] | checkedIf('No') }}>
+      <label for="executorNotApplyingReasonsNo">No</label>
+    </div>
+  </fieldset>
+</div>
+
+{% endblock %}

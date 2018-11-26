@@ -107,3 +107,46 @@ router.get('/pay/payment-breakdown', function (req, res) {
 router.post('/lab-prep/names', function (req, res) {
   res.redirect('/emails/invitation')
 })
+
+
+// Admon questions
+
+router.post('/admon/executors-not-applying', function (req, res) {
+  if (req.body.executorNotApplying === 'Yes') {
+    res.redirect('named-beneficiary')
+  } else {
+    res.redirect('executors-not-applying-reasons')
+  }
+})
+
+router.post('/admon/named-beneficiary', function (req, res) {
+  if (req.body.namedBeneficiary === 'Yes') {
+    res.redirect('named-beneficiary-age')
+  } else {
+    res.redirect('/stop-page/named-beneficiary')
+  }
+})
+
+router.post('/admon/named-beneficiary-age', function (req, res) {
+  if (req.body.namedBeneficiaryAge === 'Yes') {
+    res.redirect('life-interest')
+  } else {
+    res.redirect('/stop-page/named-beneficiary-age')
+  }
+})
+
+router.post('/admon/life-interest', function (req, res) {
+  if (req.body.lifeInterest === 'Yes') {
+    res.redirect('/stop-page/life-interest')
+  } else {
+    res.redirect('joint-application')
+  }
+})
+
+router.post('/admon/joint-application', function (req, res) {
+  if (req.body.jointApplication === 'Yes') {
+    res.redirect('/stop-page/joint-application')
+  } else {
+    res.redirect('#startpage')
+  }
+})
