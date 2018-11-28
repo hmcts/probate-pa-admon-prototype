@@ -43,7 +43,7 @@ module.exports = function (router) {
 
   router.post('/screening-questions/applicant-executor', function (req, res) {
     if (req.body.applicantIsExecutor === 'Yes') {
-      res.redirect('mental-incapacity')
+      res.redirect('http://probate-prototype.herokuapp.com/screening-questions/mental-incapacity')
     } else {
       res.redirect('/admon/executors-not-applying')
     }
