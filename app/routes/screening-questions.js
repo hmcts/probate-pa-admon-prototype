@@ -45,7 +45,7 @@ module.exports = function (router) {
     if (req.body.applicantIsExecutor === 'Yes') {
       res.redirect('http://probate-prototype.herokuapp.com/screening-questions/mental-incapacity')
     } else {
-      res.redirect('/admon/executors-not-applying')
+      res.redirect('/screening-questions/executors-not-applying')
     }
   })
 
@@ -84,4 +84,46 @@ module.exports = function (router) {
   router.post('/registration/eligible', function (req, res) {
     res.redirect('/registration/index')
   })
+
+  // Admon screeners
+  router.post('/screening-questions/executors-not-applying', function (req, res) {
+    if (req.body.executorNotApplying === 'Yes') {
+      res.redirect('named-beneficiary')
+    } else {
+      res.redirect('executors-not-applying-reasons')
+    }
+  })
+
+  router.post('/screening-questions/named-beneficiary', function (req, res) {
+    if (req.body.namedBeneficiary === 'Yes') {
+      res.redirect('named-beneficiary-age')
+    } else {
+      res.redirect('/stop-page/named-beneficiary')
+    }
+  })
+
+  router.post('/screening-questions/named-beneficiary-age', function (req, res) {
+    if (req.body.namedBeneficiaryAge === 'Yes') {
+      res.redirect('life-interest')
+    } else {
+      res.redirect('/stop-page/named-beneficiary-age')
+    }
+  })
+
+  router.post('/screening-questions/life-interest', function (req, res) {
+    if (req.body.lifeInterest === 'Yes') {
+      res.redirect('/stop-page/life-interest')
+    } else {
+      res.redirect('joint-application')
+    }
+  })
+
+  router.post('/screening-questions/joint-application', function (req, res) {
+    if (req.body.jointApplication === 'Yes') {
+      res.redirect('/stop-page/joint-application')
+    } else {
+      res.redirect('#startpage')
+    }
+  })
+
 }
