@@ -13,9 +13,30 @@ module.exports = function (router) {
         res.redirect('how-many')
         break
       default:
-        res.redirect('/the-executors/alive')
+        res.redirect('/the-executors/why-not-applying')
     }
   })
+
+  router.post('/the-executors/why-not-applying', function (req, res) {
+    if (req.body.executorNotApplying === 'Dead') {
+      res.redirect('/the-executors/date-of-death')
+    }
+    if (req.body.executorNotApplying === 'Renounced') {
+      res.redirect('/the-executors/date-of-death')
+    }
+     else {
+      res.redirect('/stoppage')
+    }
+  })
+
+  router.post('/date-of-death-admon', function (req, res) {
+    if (req.body.executorDiedBeforeAdmon === 'Yes') {
+      res.redirect('/tasklist/about-the-applicant')
+    } else {
+      res.redirect('/stoppage')
+    }
+  })
+
 
   // other executors
   router.get('/the-executors/alive', function (req, res, next) {
@@ -281,7 +302,7 @@ module.exports = function (router) {
         data: req.session.data
       })
     }
-    return res.redirect('/tasklist/review-and-confirm')
+    return res.redirect('/tasklist/about-the-applicant')
   })
 
   const handleNextRemainingExecutor = (req, res) => {
@@ -299,7 +320,7 @@ module.exports = function (router) {
       return res.redirect(`remaining-executors`)
     }
     unset(req.session.data, 'currentExecutorToEdit')
-    return res.redirect('/tasklist/review-and-confirm')
+    return res.redirect('/tasklist/about-the-applicant')
   }
 
   router.post('/the-executors/remaining-executors', function (req, res) {

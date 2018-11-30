@@ -1,0 +1,31 @@
+{% extends "question.html" %}
+
+{% set question = "Why isn't [exec] applying?" %}
+
+{% block question %}
+    {{ question }}
+{% endblock %}
+
+{% block form %}
+
+
+
+<div class="form-group">
+    <fieldset >
+        <legend class="visually-hidden">{{ question }}</legend>
+        <div class="multiple-choice">
+            <input id="radio-1" type="radio" name="executorNotApplying" value="Dead" {{ data['executorNotApplying'] | checkedIf('Yes') }}>
+            <label for="radio-1">Dead</label>
+        </div>
+        <div class="multiple-choice">
+            <input id="radio-2" type="radio" name="executorNotApplying" value="Renounced" {{ data['executorNotApplying'] | checkedIf('Yes') }}>
+            <label for="radio-2">Renounced</label>
+        </div>
+        <div class="multiple-choice">
+            <input id="radio-3" type="radio" name="executorNotApplying" value="Other" {{ data['executorNotApplying'] | checkedIf('No') }}>
+            <label for="radio-3">Other</label>
+        </div>
+    </fieldset>
+</div>
+
+{% endblock %}

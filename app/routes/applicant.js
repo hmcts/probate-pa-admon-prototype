@@ -47,7 +47,7 @@ module.exports = function (router) {
     set(req.session.data, 'applicant.home.county', req.body.county)
     set(req.session.data, 'applicant.home.postcode', req.body.postcode)
 
-    res.redirect('/the-executors/how-many')
+    res.redirect('/tasklist/review-and-confirm')
   })
 
   router.get('/applicant/address/enter-manually', function (req, res) {
@@ -97,7 +97,7 @@ module.exports = function (router) {
     set(req.session.data, 'applicant.home.county', '')
     set(req.session.data, 'applicant.home.postcode', '')
 
-    res.redirect('/the-executors/how-many')
+    res.redirect('/tasklist/review-and-confirm')
   })
 
   router.post('/applicant/address/abroad', function (req, res) {
