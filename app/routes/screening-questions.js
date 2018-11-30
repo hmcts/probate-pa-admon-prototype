@@ -122,7 +122,7 @@ module.exports = function (router) {
     if (req.body.jointApplication === 'Yes') {
       res.redirect('/stop-page/joint-application')
     } else {
-      res.redirect('#startpage')
+      res.redirect('/registration/eligible')
     }
   })
 

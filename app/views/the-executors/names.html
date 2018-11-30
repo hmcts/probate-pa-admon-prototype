@@ -24,7 +24,7 @@
 
         <div class="form-group">
             <label class="form-label-bold" for="executorName0">Executor 1</label>
-            <input readonly class="form-control focus-no-highlight" style="border: 0; margin-left: -4px; width: 100%;" value="{{ applicantName }}">
+            <input class="form-control" id="executorName1">
 
             <!-- Do not remove this hidden input. It stores the main applicant as executor one, even when they have an alias -->
             <input type="hidden" id="executorName0" name="executorName0" value="{{ data['applicantFirstName'] if data['applicantFirstName'] else '[applicantFirstName]' }} {{ data['applicantLastName'] if data['applicantLastName'] else '[applicantLastName]' }}">
