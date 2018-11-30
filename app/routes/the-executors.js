@@ -4,50 +4,37 @@ const addressLookup = require('../services/postcodeService')
 module.exports = function (router) {
   router.post('/the-executors/how-many', function (req, res) {
     req.session.data.numberOfExecutors = parseInt(get(req.session.data, 'numberOfExecutors', 0))
-    res.redirect('names')
+    return res.redirect('names')
   })
 
   router.post('/the-executors/names', function (req, res) {
-    switch (req.session.data.numberOfExecutors) {
-      case 0:
-        res.redirect('how-many')
-        break
-      default:
-        res.redirect('/the-executors/why-not-applying')
-    }
+    return res.redirect('/the-executors/why-not-applying')
   })
 
   router.post('/the-executors/why-not-applying', function (req, res) {
-    if (req.body.executorNotApplying === 'Dead') {
-      res.redirect('/the-executors/date-of-death')
-    }
-    if (req.body.executorNotApplying === 'Renounced') {
-      res.redirect('/the-executors/date-of-death')
-    }
-     else {
-      res.redirect('/stoppage')
+    if (req.body.executorNotApplying === 'Dead' || req.body.executorNotApplying === 'Renounced') {
+      return res.redirect('/the-executors/date-of-death')
+    } else {
+      return res.redirect('/stoppage')
     }
   })
 
   router.post('/date-of-death-admon', function (req, res) {
     if (req.body.executorDiedBeforeAdmon === 'Yes') {
-      res.redirect('/tasklist/about-the-applicant')
+      return res.redirect('/tasklist/about-the-applicant')
     } else {
-      res.redirect('/stoppage')
+      return res.redirect('/stoppage')
     }
   })
-
 
   // other executors
   router.get('/the-executors/alive', function (req, res, next) {
     switch (req.session.data.numberOfExecutors) {
       case 0:
-        res.redirect('how-many')
-        break
+        return res.redirect('how-many')
       case 1:
         set(req.session.data, 'allExecutorsAlive', 'Yes')
-        res.redirect('contact-details')
-        break
+        return res.redirect('contact-details')
       default:
         next()
     }
@@ -55,17 +42,17 @@ module.exports = function (router) {
 
   router.post('/the-executors/alive', function (req, res) {
     if (req.body.allExecutorsAlive === 'Yes') {
-      res.redirect('/the-executors/will-any-other-execs-be-dealing-with-the-estate')
+      return res.redirect('/the-executors/will-any-other-execs-be-dealing-with-the-estate')
     } else {
-      res.redirect('/the-executors/who-is-alive')
+      return res.redirect('/the-executors/who-is-alive')
     }
   })
 
   router.post('/the-executors/will-any-other-execs-be-dealing-with-the-estate', function (req, res) {
     if (req.body.anyOtherDealing === 'Yes') {
-      res.redirect('/the-executors/who-will-administer-estate')
+      return res.redirect('/the-executors/who-will-administer-estate')
     } else {
-      res.redirect('/the-executors/remaining-executors')
+      return res.redirect('/the-executors/remaining-executors')
     }
   })
 
@@ -75,7 +62,7 @@ module.exports = function (router) {
       let value = (get(req.body, `executorIsAlive${i}`)[1] !== 'false')
       set(req.session.data, `executorIsAlive${i}`, value)
     }
-    res.redirect('date-of-death')
+    return res.redirect('date-of-death')
   })
 
   router.get('/the-executors/date-of-death', function (req, res, next) {
@@ -125,14 +112,14 @@ module.exports = function (router) {
       req.session.data.manageEstate0 = true // the applicant is always dealing with the probate
     })
 
-    res.redirect('name-changed')
+    return res.redirect('name-changed')
   })
 
   router.post('/the-executors/name-changed', function (req, res) {
     if (req.body.executorsNameChanged === 'Yes') {
-      res.redirect('/the-executors/name-changed-who')
+      return res.redirect('/the-executors/name-changed-who')
     } else {
-      res.redirect('contact-details')
+      return res.redirect('contact-details')
     }
   })
 
@@ -150,7 +137,7 @@ module.exports = function (router) {
       }
     })
 
-    res.redirect('/the-executors/name-changed-current-name')
+    return res.redirect('/the-executors/name-changed-current-name')
   })
 
   router.get('/the-executors/name-changed-current-name', function (req, res) {
@@ -211,10 +198,9 @@ module.exports = function (router) {
     const currentFirstName = get(req.session.data, `executorCurrentFirstName${req.session.data.currentExecutorToEdit}`, '[executorCurrentFirstName]')
     const currentLastName = get(req.session.data, `executorCurrentLastName${req.session.data.currentExecutorToEdit}`, '[executorCurrentLastName]')
     const currentFullName = currentFirstName + ' ' + currentLastName
-    return (req.session.data.executorsNameChanged !== 'Yes' &&
-      currentFullName !== '[executorCurrentFirstName] [executorCurrentLastName]') ?
-      get(req.session.data, `executorName${req.session.data.currentExecutorToEdit}`, '[executorName]') :
-      currentFullName
+    return (req.session.data.executorsNameChanged !== 'Yes' && currentFullName !== '[executorCurrentFirstName] [executorCurrentLastName]')
+      ? get(req.session.data, `executorName${req.session.data.currentExecutorToEdit}`, '[executorName]')
+      : currentFullName
   }
 
   const nextExecutorDetailsOrNextStep = (req, res) => {
@@ -228,13 +214,13 @@ module.exports = function (router) {
     }
 
     if (additionalExecutorsApplying.length > 0) {
-        req.session.data.currentExecutorToEdit = additionalExecutorsApplying[0]
+      req.session.data.currentExecutorToEdit = additionalExecutorsApplying[0]
 
-        if (req.session.data.executorsNameChanged === 'Yes') {
-            return res.redirect(`name-changed-current-name`)
-        }
+      if (req.session.data.executorsNameChanged === 'Yes') {
+        return res.redirect(`name-changed-current-name`)
+      }
 
-        return res.redirect(`contact-details`)
+      return res.redirect(`contact-details`)
     }
     unset(req.session.data, 'currentExecutorToEdit')
     return res.redirect('remaining-executors')
@@ -353,5 +339,4 @@ module.exports = function (router) {
   router.post('/the-executors/renounced', function (req, res) {
     res.redirect('remaining-executors')
   })
-
 }

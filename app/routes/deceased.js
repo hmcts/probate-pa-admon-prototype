@@ -4,33 +4,33 @@ const addressLookup = require('../services/postcodeService')
 
 module.exports = function (router) {
   router.post('/deceased/about', function (req, res) {
-    res.redirect('/upload-docs/documents')
+    return res.redirect('/upload-docs/documents')
   })
 
   router.post('/upload-docs/documents', function (req, res) {
-    res.redirect('/deceased/iht-method')
+    return res.redirect('/deceased/iht-method')
   })
 
   router.post('/deceased/iht-method', function (req, res) {
     if (req.body.ihtMethod === 'Through the HMRC online service') {
-      res.redirect('/deceased/iht-identifier')
+      return res.redirect('/deceased/iht-identifier')
     } else {
-      res.redirect('/deceased/iht-value-paper')
+      return res.redirect('/deceased/iht-value-paper')
     }
   })
 
   router.post('/deceased/iht-paper', function (req, res) {
-    res.redirect('/deceased/iht-value-paper')
+    return res.redirect('/deceased/iht-value-paper')
   })
 
   router.post('/deceased/iht-value-paper', function (req, res) {
     set(req.session.data, 'grossValue', req.session.data.grossValue.replace(',', ''))
     set(req.session.data, 'netValue', req.session.data.netValue.replace(',', ''))
-    res.redirect('/deceased/alias')
+    return res.redirect('/deceased/alias')
   })
 
   router.post('/deceased/iht-identifier', function (req, res) {
-    res.redirect('/deceased/iht-value')
+    return res.redirect('/deceased/iht-value')
   })
 
   router.post('/deceased/iht-value', function (req, res) {
@@ -57,7 +57,7 @@ module.exports = function (router) {
   // })
 
   router.post('/deceased/name', function (req, res) {
-    res.redirect('/deceased/alias')
+    return res.redirect('/deceased/alias')
   })
 
   router.post('/deceased/other-names', function (req, res) {
@@ -116,11 +116,11 @@ module.exports = function (router) {
   })
 
   router.post('/deceased/dod', function (req, res) {
-    res.redirect('/deceased/dob')
+    return res.redirect('/deceased/dob')
   })
 
   router.post('/deceased/dob', function (req, res) {
-    res.redirect('/deceased/domicile')
+    return res.redirect('/deceased/domicile')
   })
 
   router.post('/deceased/domicile', function (req, res) {
@@ -158,11 +158,11 @@ module.exports = function (router) {
     set(req.session.data, 'deceased.home.county', req.body.county)
     set(req.session.data, 'deceased.home.postcode', req.body.postcode)
 
-    res.redirect('/tasklist/about-the-executors')
+    return res.redirect('/tasklist/about-the-executors')
   })
 
   router.get('/deceased/address/abroad', function (req, res) {
-    res.render('common/address/enter-abroad', {
+    return res.render('common/address/enter-abroad', {
       title: `What was the permanent address of ${req.session.data.deceasedFirstName} ${req.session.data.deceasedLastName}?`
     })
   })
@@ -175,14 +175,14 @@ module.exports = function (router) {
     set(req.session.data, 'deceased.home.county', '')
     set(req.session.data, 'deceased.home.postcode', '')
 
-    res.redirect('/tasklist/about-the-executors')
+    return res.redirect('/tasklist/about-the-executors')
   })
 
   router.post('/deceased/iht-method', function (req, res) {
     if (req.body.ihtMethod === 'Online (an estate report was filled in)') {
-      res.redirect('/deceased/iht-identifier')
+      return res.redirect('/deceased/iht-identifier')
     } else {
-      res.redirect('/deceased/iht-paper')
+      return res.redirect('/deceased/iht-paper')
     }
   })
 }

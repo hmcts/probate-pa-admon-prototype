@@ -4,9 +4,9 @@ const addressLookup = require('../services/postcodeService')
 module.exports = function (router) {
   router.post('/applicant/other-executors', function (req, res) {
     if (req.body.otherExecutors === 'Yes') {
-      res.redirect('/applicant/executor-name/2')
+      return res.redirect('/applicant/executor-name/2')
     } else {
-      res.redirect('/deceased/name')
+      return res.redirect('/deceased/name')
     }
   })
 
@@ -15,28 +15,28 @@ module.exports = function (router) {
     req.session.data.applicantLastName = req.body.applicantLastName.trim()
     req.session.data.applicantFullName = req.session.data.applicantFirstName + ' ' + req.session.data.applicantLastName
 
-    res.redirect('/applicant/name-on-will')
+    return res.redirect('/applicant/name-on-will')
   })
 
   router.post('/applicant/name-on-will', function (req, res) {
     if (req.body.applicantNameSameAsOnWill === 'Yes') {
-      res.redirect('/applicant/phone-number')
+      return res.redirect('/applicant/phone-number')
     } else {
-      res.redirect('/applicant/name-will')
+      return res.redirect('/applicant/name-will')
     }
   })
 
   router.post('/applicant/name-will', function (req, res) {
-    res.redirect('/applicant/reason-name-change')
+    return res.redirect('/applicant/reason-name-change')
   })
 
   router.post('/applicant/reason-name-change', function (req, res) {
-     res.redirect('/applicant/phone-number')
+    return res.redirect('/applicant/phone-number')
   })
 
   router.post('/applicant/phone-number', function (req, res) {
     req.session.data.applicantPhoneNumber = req.body.applicantPhoneNumber
-    res.redirect('/applicant/address/postcode')
+    return res.redirect('/applicant/address/postcode')
   })
 
   router.post('/applicant/address/postcode', function (req, res) {
@@ -47,12 +47,12 @@ module.exports = function (router) {
     set(req.session.data, 'applicant.home.county', req.body.county)
     set(req.session.data, 'applicant.home.postcode', req.body.postcode)
 
-    res.redirect('/tasklist/review-and-confirm')
+    return res.redirect('/tasklist/review-and-confirm')
   })
 
   router.get('/applicant/address/enter-manually', function (req, res) {
     const title = 'What is your current address?'
-    res.render('common/address/enter-manually', {
+    return res.render('common/address/enter-manually', {
       title: title,
       address: get(req.session, 'applicant.home', {})
     })
@@ -60,7 +60,7 @@ module.exports = function (router) {
 
   router.get('/applicant/address/enter-manually', function (req, res) {
     const title = 'What is your current address?'
-    res.render('common/address/enter-manually', {
+    return res.render('common/address/enter-manually', {
       title: title,
       address: get(req.session, 'applicant.home', {})
     })
@@ -84,7 +84,7 @@ module.exports = function (router) {
   })
 
   router.get('/applicant/address/abroad', function (req, res) {
-    res.render('common/address/enter-abroad', {
+    return res.render('common/address/enter-abroad', {
       title: 'What is your current address?'
     })
   })
@@ -97,10 +97,10 @@ module.exports = function (router) {
     set(req.session.data, 'applicant.home.county', '')
     set(req.session.data, 'applicant.home.postcode', '')
 
-    res.redirect('/tasklist/review-and-confirm')
+    return res.redirect('/tasklist/review-and-confirm')
   })
 
   router.post('/applicant/address/abroad', function (req, res) {
-    res.redirect('/the-executors/how-many')
+    return res.redirect('/the-executors/how-many')
   })
 }
