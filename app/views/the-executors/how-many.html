@@ -1,6 +1,6 @@
 {% extends "question.html" %}
 
-{% set question = "You need to tell us about all the executors named on the will even if they’ve died." %}
+{% set question = "How many executors are named on the will and any updates ('codicils')?" %}
 
 {% block question %}
 {{ question }}
@@ -8,16 +8,15 @@
 
 {% block form %}
 
-<p class="text">Include people named on any updates (codicils) to the will.</p>
-<!-- <p class="text">You must include:</p>
+<!-- <p class="text">Include people named on any updates (codicils) to the will.</p> --> 
+<p class="text">The total number must include anyone who:</p>
 
 <ul class="list list-bullet">
 
-    <li>executors who&rsquo;ve died </li>
-    <li>executors who are not applying for probate</li>
-    <li>executors who are applying for probate</li>
-
-</ul> -->
+    <li>is a current executor, even if they aren’t applying for probate</li>
+    <li>was meant to be an executor but can’t be one (for example, if they’ve died) </li>
+    <li>has been named as a 'substitute' executor</li>
+</ul> 
 
 <!-- <h2 class="heading-medium">Who to include</h2>
 
@@ -25,11 +24,11 @@
 </p> -->
 
 
-<!--<div class="panel panel-border-wide"> -->
+<!--<div class="panel panel-border-wide"> 
 <p class="text">
-    Do not include anyone who will only be an executor if current executors can&rsquo;t apply.
+    Include anyone who is named as a 'substitute' executor.
 </p>
-<!-- </div> -->
+</div> -->
 
 
 
@@ -40,7 +39,7 @@
         </legend>
 
         <label class="form-label-bold" for="numberOfExecutors">
-            Number of executors
+            Total number of executors
         </label>
         <input class="form-control" id="numberOfExecutors" type="number" name="numberOfExecutors" style="width:4em;" value="{{data['numberOfExecutors']}}">
 
