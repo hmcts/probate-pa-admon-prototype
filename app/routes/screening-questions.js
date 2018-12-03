@@ -54,7 +54,7 @@ module.exports = function (router) {
     if (req.body.executorNotApplying === 'Yes') {
       return res.redirect('named-beneficiary')
     } else {
-      return res.redirect('executors-not-applying-reasons')
+      return res.redirect('/stop-page/executors-not-applying-other-reason')
     }
   })
    router.post('/screening-questions/named-beneficiary', function (req, res) {
@@ -216,7 +216,7 @@ module.exports = function (router) {
       if (req.body.executorNotApplying === 'Yes') {
         return res.redirect('named-beneficiary')
       } else {
-        return res.redirect('executors-not-applying-reasons')
+        return res.redirect('/stop-page/executors-not-applying-other-reason')
       }
     })
      router.post('/screening-questions-account/named-beneficiary', function (req, res) {

@@ -48,7 +48,7 @@ module.exports = function (router) {
       set(req.session.data, 'currentExecutorToEdit', get(req.session.data, 'currentExecutorToEdit', 0) + 1)
       return res.redirect('/the-executors/why-not-applying')
     } else {
-      return res.redirect('/stoppage')
+      return res.redirect('/stop-page/executors-not-applying-other-reason')
     }
   })
 
@@ -65,7 +65,7 @@ module.exports = function (router) {
     if (req.body.executorDiedBeforeAdmon === 'Yes') {
       return res.redirect('/tasklist/about-the-applicant')
     } else {
-      return res.redirect('/stoppage')
+      return res.redirect('/stop-page/executors-not-applying-other-reason')
     }
   })
 

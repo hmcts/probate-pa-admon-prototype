@@ -227,6 +227,7 @@ Question page
             </tr>
 
             <!-- the executors -->
+
             <tr>
                 <td colspan="3"><span class="heading-medium">About the executors</span></td>
             </tr>
@@ -235,103 +236,74 @@ Question page
                 <td colspan="2">
                     <div class="grid-row">
                         <div class="column-one-half check-your-answers__question">Number of executors named on the will</div>
-                        <div class="column-one-half">
-                            {{ data['numberOfExecutors'] if data['numberOfExecutors'] else '[numberOfExecutors]' }}
-                        </div>
+                        <div class="column-one-half">    {{ data['numberOfExecutors'] if data['numberOfExecutors'] else '[numberOfExecutors]' }}</div>
                     </div>
                 </td>
                 <td class="change-answer">
-                    <a href="{{ '/the-executors/how-many' | redirectUrl('/the-executors/address', '/check-your-answers')}}">Change</a>
+                    <a href="{{ '/screening-questions/will-left' | redirectUrl('/screening-questions/will-left', '/summary/the-executors')}}">
+                        Change<span class="visuallyhidden">whether a will was left</span></a>
                 </td>
             </tr>
 
-            <tr>
-                <td colspan="2">
-                    <div class="grid-row">
-                        <div class="column-one-half check-your-answers__question">Are all the executors alive?</div>
-                        <div class="column-one-half">
-                            {{ data['allExecutorsAlive'] if data['allExecutorsAlive'] else '[allExecutorsAlive]' }}
-                        </div>
-                    </div>
-                </td>
-                <td class="change-answer">
-                    <a href="{{ '/the-executors/alive' | redirectUrl('/the-executors/address', '/check-your-answers')}}">Change</a>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="3"><span class="heading-small">Executors who are applying for probate</span></td>
-            </tr>
 
             {% for i in range(0, data['numberOfExecutors']) %}
                 {% if (data | executorApplyingForProbate(i)) %}
                     <tr>
                         <td colspan="2">
                             <div class="grid-row">
-                                <div class="column-one-half check-your-answers__question">Name</div>
+                                <div class="column-one-half check-your-answers__question">Name of executor</div>
                                 <div class="column-one-half">
-                                    {{ data['executorName' + i] }}
-                                    {% if (data['executorCurrentFirstName' + i].length > 0 or data['executorCurrentSecondName' + i].length > 0) %}
-                                    <br/>also known as {{ data['executorCurrentFirstName' + i] }} {{ data['executorCurrentLastName' + i] }}
-                                    {% endif %}
+                                    {{ data.executors['executor' + i].name }}
                                 </div>
                             </div>
-                            <div class="grid-row">
-                                <div class="column-one-half check-your-answers__question">Address</div>
-                                <div class="column-one-half">
-                                    {{ data | getExecutorAddress(i) }}
-                                </div>
-                            </div>
-                            <div class="grid-row">
-
-                                {% if (data | isApplicant(i)) %}
-                                    <div class="column-one-half check-your-answers__question">Phone number</div>
-                                {% else %}
-                                    <div class="column-one-half check-your-answers__question">Mobile phone number</div>
-                                {% endif %}
-
-                                <div class="column-one-half">
-                                    {% if (data | isApplicant(i)) %}
-                                        {{ data.applicantPhoneNumber }}
-                                    {% else %}
-                                        {{ data['executorPhoneNumber' + i] }}
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% if not (data | isApplicant(i)) %}
-                            <div class="grid-row">
-                                <div class="column-one-half check-your-answers__question">Email address</div>
-                                <div class="column-one-half">
-                                    {{ data['executorEmail' + i] }}
-                                </div>
-                            </div>
-                            {% endif %}
                         </td>
                         <td class="change-answer">
-                            <a href="{{ '/the-executors/who-will-administer-estate {{ '/the-executors/alive' | redirectUrl('/the-executors/address', '/check-your-answers')}}">Change</a>
+                            <a href="{{ '/the-executors/names' | redirectUrl('/tasklist/review-and-confirm', '/summary/the-executors')}}">
+                                Change<span class="visuallyhidden">executors</span></a>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <div class="grid-row">
+                                <div class="column-one-half check-your-answers__question">Why isn't {{ data.executors['executor' + i].name }} applying?</div>
+                                <div class="column-one-half">
+                                    {{ data.executors['executor' + i].executorNotApplying }}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="change-answer">
+                            <a href="{{ '/the-executors/why-not-applying' | redirectUrl('/tasklist/review-and-confirm', '/summary/the-executors')}}">
+                                Change<span class="visuallyhidden">executors</span></a>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td colspan="2">
+                            <div class="grid-row">
+                                <div class="column-one-half check-your-answers__question">Did   {{ data.executors['executor' + i].name }} die before {{ data['deceasedFirstName'] if data['deceasedFirstName'] else '[deceasedFirstName]' }} {{ data['deceasedLastName'] if data['deceasedLastName'] else '[deceasedLastName]' }}</div>
+                                <div class="column-one-half">
+                                    {{ data.executors['executor' + i].executorDiedBefore }}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="change-answer">
+                            <a href="{{ '/the-executors/date-of-death' | redirectUrl('/tasklist/review-and-confirm', '/summary/the-executors')}}">
+                                Change<span class="visuallyhidden">executors</span></a>
+                        </td>
+                    </tr>
+                    {% if (data['executorNotApplying'] === 'Dead') %}
+                    {% endif %}
+
+
                 {% endif %}
             {% endfor %}
 
 
             {% if ((data | onlyApplyingCoExecutors | length) <  (( data['numberOfExecutors'] | int ) -1)) %}
-                <tr>
-                    <td colspan="3"><span class="heading-small">Other executors you&rsquo;ve told us about</span></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div class="grid-row">
-                            <div class="column-one-half">
-                                <span class="heading-small">Executor</span>
-                            </div>
-                            <div class="column-one-half">
-                                <span class="heading-small">Are they applying?</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>&nbsp;</td>
-                </tr>
+
 
                 {% for i in range(0, data['numberOfExecutors']) %}
                     {% if (not (data | executorApplyingForProbate(i))) and ( (data['labParticipantName'] !== data['executorName' + i]) and (data['leadLabApplicantName'] !== data['executorName' + i])) %}
