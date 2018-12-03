@@ -45,9 +45,47 @@ module.exports = function (router) {
     if (req.body.applicantIsExecutor === 'Yes') {
       res.redirect('mental-incapacity')
     } else {
-      res.redirect('https://probate-admon-prototype.herokuapp.com/admon/executors-not-applying')
+      res.redirect('/screening-questions/executors-not-applying')
     }
   })
+
+  // Admon screeners
+  router.post('/screening-questions/executors-not-applying', function (req, res) {
+    if (req.body.executorNotApplying === 'Yes') {
+      return res.redirect('named-beneficiary')
+    } else {
+      return res.redirect('executors-not-applying-reasons')
+    }
+  })
+   router.post('/screening-questions/named-beneficiary', function (req, res) {
+    if (req.body.namedBeneficiary === 'Yes') {
+      return res.redirect('named-beneficiary-age')
+    } else {
+      return res.redirect('/stop-page/named-beneficiary')
+    }
+  })
+   router.post('/screening-questions/named-beneficiary-age', function (req, res) {
+    if (req.body.namedBeneficiaryAge === 'Yes') {
+      return res.redirect('life-interest')
+    } else {
+      return res.redirect('/stop-page/named-beneficiary-age')
+    }
+  })
+   router.post('/screening-questions/life-interest', function (req, res) {
+    if (req.body.lifeInterest === 'Yes') {
+      return res.redirect('/stop-page/life-interest')
+    } else {
+      return res.redirect('joint-application')
+    }
+  })
+
+  router.post('/screening-questions/joint-application', function (req, res) {
+  if (req.body.jointApplication === 'Yes') {
+    return res.redirect('/stop-page/joint-application')
+  } else {
+    return res.redirect('/registration/eligible')
+  }
+})
 
       router.post('/screening-questions/mental-incapacity', function (req, res) {
     if (req.body.mentalIncapacity === 'Yes') {
@@ -127,11 +165,13 @@ module.exports = function (router) {
       }
     })
 
+
+
     router.post('/screening-questions-account/applicant-executor', function (req, res) {
       if (req.body.applicantIsExecutor === 'Yes') {
-        res.redirect('/screening-questions-account/mental-incapacity')
+        res.redirect('mental-incapacity')
       } else {
-        res.redirect('https://probate-admon-prototype.herokuapp.com/admon/executors-not-applying')
+        res.redirect('/screening-questions-account/executors-not-applying')
       }
     })
 
@@ -170,4 +210,43 @@ module.exports = function (router) {
     router.post('/registration/eligible', function (req, res) {
       res.redirect('/registration/index')
     })
+
+    // Admon screeners
+    router.post('/screening-questions-account/executors-not-applying', function (req, res) {
+      if (req.body.executorNotApplying === 'Yes') {
+        return res.redirect('named-beneficiary')
+      } else {
+        return res.redirect('executors-not-applying-reasons')
+      }
+    })
+     router.post('/screening-questions-account/named-beneficiary', function (req, res) {
+      if (req.body.namedBeneficiary === 'Yes') {
+        return res.redirect('named-beneficiary-age')
+      } else {
+        return res.redirect('/stop-page/named-beneficiary')
+      }
+    })
+     router.post('/screening-questions-account/named-beneficiary-age', function (req, res) {
+      if (req.body.namedBeneficiaryAge === 'Yes') {
+        return res.redirect('life-interest')
+      } else {
+        return res.redirect('/stop-page/named-beneficiary-age')
+      }
+    })
+     router.post('/screening-questions-account/life-interest', function (req, res) {
+      if (req.body.lifeInterest === 'Yes') {
+        return res.redirect('/stop-page/life-interest')
+      } else {
+        return res.redirect('joint-application')
+      }
+    })
+
+    router.post('/screening-questions-account/joint-application', function (req, res) {
+    if (req.body.jointApplication === 'Yes') {
+      return res.redirect('/stop-page/joint-application')
+    } else {
+      return res.redirect('/tasklist/about-the-person-who-died-today')
+    }
+  })
+
 }

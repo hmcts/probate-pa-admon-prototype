@@ -1,0 +1,31 @@
+{% extends "question-account.html" %}
+
+{% set question = "Has anyone in the will been left something only for their lifetime?" %}
+
+<!-- <p> Has anyone in the will been left something that can only be used during their lifetime? </p> -->
+
+{% block question %}
+{{ question }}
+{% endblock %}
+
+
+
+{% block form %}
+<p>This is sometimes known as having a ‘life interest’. </p>
+
+<p>For example, you may have a life interest in a house. This means you can live in it for the rest of your life but you can't leave it to someone else.</p>
+<div class="form-group">
+  <fieldset class="inline">
+    <legend class="visually-hidden">{{ question }}</legend>
+    <div class="multiple-choice">
+      <input id="lifeInterestYes" type="radio" name="lifeInterest" value="Yes" {{ data['lifeInterest'] | checkedIf('Yes') }}>
+      <label for="lifeInterestYes">Yes</label>
+    </div>
+    <div class="multiple-choice">
+      <input id="lifeInterestNo" type="radio" name="lifeInterest" value="No" {{ data['lifeInterest'] | checkedIf('No') }}>
+      <label for="lifeInterestNo">No</label>
+    </div>
+  </fieldset>
+</div>
+
+{% endblock %}

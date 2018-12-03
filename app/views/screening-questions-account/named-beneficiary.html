@@ -1,0 +1,27 @@
+{% extends "question-account.html" %}
+
+{% set question = "Are you named in the will as a beneficiary?" %}
+
+{% block question %}
+{{ question }}
+{% endblock %}
+
+
+
+{% block form %}
+<p>A beneficiary is someone who will receive money or property from the person who died. There may be more than one person named as a beneficiary.</p>
+<div class="form-group">
+  <fieldset class="inline">
+    <legend class="visually-hidden">{{ question }}</legend>
+    <div class="multiple-choice">
+      <input id="namedBeneficiaryYes" type="radio" name="namedBeneficiary" value="Yes" {{ data['namedBeneficiary'] | checkedIf('Yes') }}>
+      <label for="namedBeneficiaryYes">Yes</label>
+    </div>
+    <div class="multiple-choice">
+      <input id="namedBeneficiaryNo" type="radio" name="namedBeneficiary" value="No" {{ data['namedBeneficiary'] | checkedIf('No') }}>
+      <label for="namedBeneficiaryNo">No</label>
+    </div>
+  </fieldset>
+</div>
+
+{% endblock %}
