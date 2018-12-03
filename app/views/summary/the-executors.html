@@ -359,36 +359,37 @@ Question page
                         <div class="grid-row">
                             <div class="column-one-half">Name</div>
                             <div class="column-one-half">
-                                {{ data['executorName' + i] }}
-                                {% if (data['executorNewName' + i].length > 0) %}
-                                <br/>also known as {{data['executorNewName' + i]}}
-                                {% endif %}
+                                {{ data.executors['executor' + i].name }}
                             </div>
                         </div>
+                    </td>
+                    <td class="change-answer">
+                        <a href="{{ '/the-executors/how-many' | redirectUrl('/tasklist/review-and-confirm', '/summary/the-executors')}}">
+                            Change<span class="visuallyhidden">executors</span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
                         <div class="grid-row">
-                            <div class="column-one-half">Address</div>
+                            <div class="column-one-half">Why not applying</div>
                             <div class="column-one-half">
-                                {{ (data['applicant'].home | address) if (data | isApplicant(i)) else (data['executorAddress' + i] | address) }}
+                                {{ data.executors['executor' + i].executorNotApplying }}
                             </div>
                         </div>
+                    </td>
+                    <td class="change-answer">
+                        <a href="{{ '/the-executors/how-many' | redirectUrl('/tasklist/review-and-confirm', '/summary/the-executors')}}">
+                            Change<span class="visuallyhidden">executors</span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
                         <div class="grid-row">
-                            <div class="column-one-half">Phone number</div>
+                            <div class="column-one-half">Date of death</div>
                             <div class="column-one-half">
-                                {% if (data | isApplicant(i)) %}
-                                    {{ data.applicantPhoneNumber }}
-                                {% else %}
-                                    {{ data['executorPhoneNumber' + i] }}
-                                {% endif %}
+                                {{ data.executors['executor' + i].executorDiedBefore }}
                             </div>
                         </div>
-                        {% if not (data | isApplicant(i)) %}
-                        <div class="grid-row">
-                            <div class="column-one-half">Email address</div>
-                            <div class="column-one-half">
-                                {{ data['executorEmail' + i] }}
-                            </div>
-                        </div>
-                        {% endif %}
                     </td>
                     <td class="change-answer">
                         <a href="{{ '/the-executors/how-many' | redirectUrl('/tasklist/review-and-confirm', '/summary/the-executors')}}">
