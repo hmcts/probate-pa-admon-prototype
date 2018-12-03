@@ -69,8 +69,7 @@
                             <div class="font-small">Completed</div>
                         </td>
                         <td>
-                            <div class="font-small"><span><a href="thank-you-account"
-                                                             rel="external noopener">View</a></span></div>
+                            <div class="font-small"><span><a href="thank-you-bookmarked" rel="external noopener">View</a></span></div>
                         </td>
                         <!-- <td>
                             <div class="font-small"><span><a onclick="myFunction()" rel="external noopener">Delete</a></span></div>
@@ -123,7 +122,7 @@
     <script>
       function dateCreated () {
         var dateField = document.getElementById('dateCreated')
-        dateField.innerHTML = moment().add(1, 'months').format('01 MMM YYYY')
+        dateField.innerHTML = moment().subtract(2, 'months').format('02 MMM YYYY—11:05:36')
       }
 
       function myFunction () {
