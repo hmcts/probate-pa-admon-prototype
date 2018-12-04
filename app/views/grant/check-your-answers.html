@@ -6,7 +6,7 @@
 
 {% block content %}
 <main id="content" role="main">
-    
+
 
     <div class="phase-banner-beta">
   <p>
@@ -15,7 +15,7 @@
   </p>
 </div>
 
-    
+
 
     <h1 class="heading-large">
         Check your answers
@@ -24,45 +24,66 @@
 
     <table class="check-your-answers form-group">
         <tbody>
-            
 
 
 
-<tr>
-    <td colspan="2">
-    
-    
-    
-    
-        <div class="grid-row">
-            <div class="column-one-half">How many extra UK copies of the grant do you need?</div>
-            <div class="column-one-half">{{ data['ukGrant'] }}</div>
-        </div>
-    
-    
-    </td>
-    <td class="change-answer">
-        
-            
-            <a href="copies-uk">Change<span class="visuallyhidden">Change</span></a>
-        
-    </td>
-</tr>
+
+          <tr>
+              <td colspan="2">
+
+
+
+
+                  <div class="grid-row">
+                      <div class="column-one-half">How many extra UK copies of the grant do you need?</div>
+                      <div class="column-one-half">{{ data['ukGrant'] }}</div>
+                  </div>
+
+
+              </td>
+              <td class="change-answer">
+
+
+                      <a href="/grant/copies">Change<span class="visuallyhidden">Change</span></a>
+
+              </td>
+          </tr>
+
+          <tr>
+              <td colspan="2">
+
+
+
+
+                  <div class="grid-row">
+                      <div class="column-one-half">How many extra copies to use outside the UK?</div>
+                      <div class="column-one-half">{{ data['overseasGrant'] }}</div>
+                  </div>
+
+
+              </td>
+              <td class="change-answer">
+
+
+                      <a href="/grant/copies">Change<span class="visuallyhidden">Change</span></a>
+
+              </td>
+          </tr>
 
 <!-- <tr>
     <td colspan="2">
-        
+
         <div class="grid-row">
             <div class="column-one-half">Did the person who died have assets outside the UK?</div>
             <div class="column-one-half">{{ data['assetsOverseas'] }}</div>
         </div>
-    
+
     </td>
     <td class="change-answer">
-        
-            
+
+
             <a href="/assets-overseas">Change<span class="visuallyhidden">Change</span></a>
-        
+
     </td>
 </tr> -->
 
@@ -71,27 +92,31 @@
 
  <tr>
     <td colspan="2">
-    
+
         <div class="grid-row">
             <div class="column-one-half">How many copies of the grant do you need for use outside the UK?</div>
             <div class="column-one-half">{{ data['overseasGrant'] }}</div>
         </div>
 
-    
+
     </td>
+
+
     <td class="change-answer">
-        
-            
+
+
             <a href="copies-overseas">Change<span class="visuallyhidden">Change</span></a>
-        
+
     </td>
 </tr>
+
+
 <!-- {% endif %} -->
 
-            
+
         </tbody>
     </table>
-    
+
     <div class="form-group">
         <p><a href="/tasklist/pay-and-submit" class="button">Continue</a></p>
     </div>
