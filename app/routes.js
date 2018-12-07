@@ -86,7 +86,7 @@ router.get('/pay/payment-breakdown', function (req, res) {
   let docFee = 0.5
   let overThreashold = req.session.data.net205 >= 5000 || req.session.data.net207 >= 5000 || req.session.data.net400 >= 5000 || req.session.data.netValue >= 5000
   if (!overThreashold) {
-    currentFee = 0
+    currentFee = 215
   }
   const ukGrant = req.session.data.ukGrant || 0
   const overseasGrant = req.session.data.overseasGrant || 0
