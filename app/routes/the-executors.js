@@ -42,7 +42,7 @@ module.exports = function (router) {
     set(req.session.data, `executors[executor${currentExecutorToEdit}].executorNotApplying`, req.body[`executorNotApplying${currentExecutorToEdit}`])
     unset(req.session.data, `executorNotApplying${currentExecutorToEdit}`)
 
-    if (req.session.data.executors[`executor${currentExecutorToEdit}`].executorNotApplying === 'Dead') {
+    if (req.session.data.executors[`executor${currentExecutorToEdit}`].executorNotApplying === '(Theyve died)') {
       return res.redirect('/the-executors/date-of-death')
     } else if (req.session.data.executors[`executor${currentExecutorToEdit}`].executorNotApplying === 'Renounced') {
       set(req.session.data, 'currentExecutorToEdit', get(req.session.data, 'currentExecutorToEdit', 0) + 1)
