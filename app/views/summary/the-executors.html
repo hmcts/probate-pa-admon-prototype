@@ -60,7 +60,11 @@ Question page
                         <div class="grid-row">
                             <div class="column-one-half check-your-answers__question">Why isn't {{ data.executors['executor' + i].name }} applying?</div>
                             <div class="column-one-half">
-                                {{ data.executors['executor' + i].executorNotApplying }}
+                                {% if data.executors['executor' + i].executorNotApplying === 'Dead' %}
+                                    Died
+                                {% else %}
+                                    {{ data.executors['executor' + i].executorNotApplying }}
+                                {% endif %}
                             </div>
                         </div>
                     </td>
