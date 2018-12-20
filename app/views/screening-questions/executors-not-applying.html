@@ -1,6 +1,6 @@
 {% extends "question_no_sign_out.html" %}
 
-{% set question = "Why are the executors not applying?" %}
+{% set question = "Have all the executors died or chosen not to apply?" %}
 
 {% block question %}
 {{ question }}
@@ -9,21 +9,21 @@
 
 
 {% block form %}
-<!-- <p>To continue with your application online, all the executors must have either given up their right to apply now or in the future (known as ‘renouncing’)
-or died.</p>
+<p>Executors who choose not to apply for probate give up their right to do so, now and in the future. </p>
 
+<p> You’ll get a form which they need to complete as part of this application. </p>
 
-<p>If there is another reason that an executor can’t apply, for example they are not capable of making their own decisions, you need to <a href="">continue your application on paper</a>. </p> --> 
+<!-- <p>If there is another reason that an executor can’t apply, for example they are not capable of making their own decisions, you need to <a href="">continue your application by post</a>. </p> -->
 <div class="form-group">
   <fieldset class="inline">
     <legend class="visually-hidden">{{ question }}</legend>
     <div class="multiple-choice">
       <input id="executorNotApplyingYes" type="radio" name="executorNotApplying" value="Yes" {{ data['executorNotApplying'] | checkedIf('Yes') }}>
-      <label for="executorNotApplyingYes">The executors have given up their right to apply (known as ‘renouncing’) or they have died</label>
+      <label for="executorNotApplyingYes">Yes</label>
     </div>
     <div class="multiple-choice">
       <input id="executorNotApplyingNo" type="radio" name="executorNotApplying" value="No" {{ data['executorNotApplying'] | checkedIf('No') }}>
-      <label for="executorNotApplyingNo">There's another reason the executors can't apply</label>
+      <label for="executorNotApplyingNo">No</label>
     </div>
   </fieldset>
 </div>
