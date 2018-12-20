@@ -45,6 +45,7 @@ Question page
 
 <h3 class="heading-small">3. Other documents</h3>
 -->
+
         <ul class="list list-bullet text">
 
             <!-- <li>a signed and dated <a href="public/images/Cover-letter-noneedtosignthewill.pdf">cover letter</a></li> -->
@@ -64,7 +65,7 @@ Question page
             </li>
             {% endif %}
 
-            {% if renunc === true %}
+            {% if executorNotApplying === Renounced %}
             <li>{{data['hello']}} a renunciation form filled in and signed by any executors that don’t want to apply
                 now, and give up their right to do so in the future
             </li>
