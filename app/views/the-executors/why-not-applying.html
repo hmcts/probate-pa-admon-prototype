@@ -10,22 +10,27 @@
 
 {% block form %}
 
-
+<p class="text">This executor can't apply because they: 
 
 <div class="form-group">
     <fieldset >
         <legend class="visually-hidden">{{ question }}</legend>
         <div class="multiple-choice">
             <input id="radio-1" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Dead" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
-            <label for="radio-1">They've died</label>
+            <label for="radio-1">have died</label>
         </div>
         <div class="multiple-choice">
             <input id="radio-2" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Renounced" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
-            <label for="radio-2">They've given up their right to apply now or in the future</label>
+            <label for="radio-2">chose not apply, giving up their right to do so now or in the future</label>
         </div>
         <div class="multiple-choice">
-            <input id="radio-3" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Other" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('No') }}>
-            <label for="radio-3">Another reason</label>
+            <input id="radio-3" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="MentallyIncapable" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
+            <label for="radio-3">are not able to make their own decisions (see <a href="https://www.gov.uk/make-decisions-for-someone/assessing-mental-capacity" target="_blank" rel="external noopener">mental capacity</a>)</label>
+        </div>
+
+        <div class="multiple-choice">
+            <input id="radio-4" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Other" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('No') }}>
+            <label for="radio-4">have another reason</label>
         </div>
     </fieldset>
 </div>
