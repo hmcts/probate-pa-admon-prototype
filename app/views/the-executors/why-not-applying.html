@@ -10,29 +10,100 @@
 
 {% block form %}
 
-<p class="text">This executor can't apply because they: 
+<style>
+  #another-reason {
+      display: none;
+    }
+  </style>
+
+
+
+<p class="text">This executor can't apply because they:
+
+<!-- <div class="form-group">
+  <fieldset class="">
+    <legend class="visually-hidden">{{ question }}</legend>
+    <div class="multiple-choice">
+        <input id="radio-1" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Dead" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
+        <label for="radio-1">have died</label>
+    </div>
+    <div class="multiple-choice">
+        <input id="radio-2" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Renounced" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
+        <label for="radio-2">chose not apply, giving up their right to do so now or in the future</label>
+    </div>
+    <div class="multiple-choice">
+        <input id="radio-3" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="MentallyIncapable" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
+        <label for="radio-3">are not able to make their own decisions (see <a href="https://www.gov.uk/make-decisions-for-someone/assessing-mental-capacity" target="_blank" rel="external noopener">mental capacity</a>)</label>
+    </div>
+
+    <div class="multiple-choice" data-target="another-reason">
+      <input id="radio-4" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Other" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('No') }}>
+      <label for="radio-4">have another reason</label>
+    </div>
+    <div class="panel panel-border-narrow" id="another-reason" aria-hidden="false">
+      <label for="anotherReasonLabel" class="form-label">Email address</label>
+      <input class="form-control" id="anotherReasonEnter" name="anotherReasonEnter" type="text" value="{{ data['applicantEmail'] }}">
+    </div>
+
+  </fieldset>
+</div> -->
 
 <div class="form-group">
-    <fieldset >
-        <legend class="visually-hidden">{{ question }}</legend>
-        <div class="multiple-choice">
-            <input id="radio-1" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Dead" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
-            <label for="radio-1">have died</label>
-        </div>
-        <div class="multiple-choice">
-            <input id="radio-2" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Renounced" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
-            <label for="radio-2">chose not apply, giving up their right to do so now or in the future</label>
-        </div>
-        <div class="multiple-choice">
-            <input id="radio-3" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="MentallyIncapable" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
-            <label for="radio-3">are not able to make their own decisions (see <a href="https://www.gov.uk/make-decisions-for-someone/assessing-mental-capacity" target="_blank" rel="external noopener">mental capacity</a>)</label>
-        </div>
+  <fieldset class="">
+    <legend class="visually-hidden">{{question}}</legend>
+    <div class="multiple-choice">
+        <input id="radio-1" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" onclick="myFunction1()" value="Dead" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
+        <label for="radio-1">have died</label>
+    </div>
+    <div class="multiple-choice">
+        <input id="radio-2" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" onclick="myFunction1()" value="Renounced" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
+        <label for="radio-2">chose not apply, giving up their right to do so now or in the future</label>
+    </div>
+    <div class="multiple-choice">
+        <input id="radio-3" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" onclick="myFunction1()" value="MentallyIncapable" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('Yes') }}>
+        <label for="radio-3">are not able to make their own decisions (see <a href="https://www.gov.uk/make-decisions-for-someone/assessing-mental-capacity" target="_blank" rel="external noopener">mental capacity</a>)</label>
+    </div>
 
-        <div class="multiple-choice">
-            <input id="radio-4" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" value="Other" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('No') }}>
-            <label for="radio-4">have another reason</label>
-        </div>
-    </fieldset>
+
+
+    <div class="multiple-choice" data-target="another-reason">
+      <input id="radio-4" type="radio" name="executorNotApplying{{data['currentExecutorToEdit']}}" onclick="myFunction()" aria-controls="another-reason" aria-expanded="true" value="AnotherReason" {{ data['executorNotApplying' + data['currentExecutorToEdit']] | checkedIf('No') }}>
+      <label for="radio-4">have another reason</label>
+    </div>
+    <div class="panel panel-border-narrow" id="another-reason" aria-hidden="false">
+      <label for="applicantPhoneNumber" class="form-label">Enter another reason</label>
+      <span class="form-hint">This is hint text</span>
+            <textarea class="form-control form-control-3-4" id="textarea-a" cols="50" rows="10" id="anotherReasonEnter" name="anotherReasonEnter"value="{{ data['anotherReasonEnter'] }}"></textarea>
+
+    </div>
+  </fieldset>
 </div>
+
+
+
+{% endblock %}
+
+{% block page_scripts %}
+
+<script>
+
+function myFunction() {
+    var x = document.getElementById("another-reason");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "block";
+    }
+}
+
+function myFunction1() {
+    var x = document.getElementById("another-reason");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
 
 {% endblock %}

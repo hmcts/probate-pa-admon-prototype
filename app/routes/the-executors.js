@@ -47,7 +47,11 @@ module.exports = function (router) {
     } else if (req.session.data.executors[`executor${currentExecutorToEdit}`].executorNotApplying === 'Renounced') {
       set(req.session.data, 'currentExecutorToEdit', get(req.session.data, 'currentExecutorToEdit', 0) + 1)
       return res.redirect('/the-executors/why-not-applying')
-    } else {
+    } else if (req.session.data.executors[`executor${currentExecutorToEdit}`].executorNotApplying === 'AnotherReason') {
+      set(req.session.data, 'currentExecutorToEdit', get(req.session.data, 'currentExecutorToEdit', 0) + 1)
+      return res.redirect('/the-executors/why-not-applying')
+    }
+    else {
       return res.redirect('/stop-page/executors-not-applying-other-reason')
     }
   })

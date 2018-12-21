@@ -68,11 +68,29 @@ Question page
                             </div>
                         </div>
                     </td>
+
                     <td class="change-answer">
                         <a href="{{ '/the-executors/why-not-applying' | redirectUrl('/tasklist/review-and-confirm', '/summary/the-executors')}}">
                             Change<span class="visuallyhidden">executors</span></a>
                     </td>
                 </tr>
+                  {% if data.executors['executor' + i].executorNotApplying === 'AnotherReason' %}
+                <tr>
+                    <td colspan="2">
+                        <div class="grid-row">
+                            <div class="column-one-half check-your-answers__question">Other reason {{ data.executors['executor' + i].name }} isn't applying</div>
+                            <div class="column-one-half">
+                              {{ data['anotherReasonEnter'] if data['anotherReasonEnter'] else '[anotherReasonEnter]' }}
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="change-answer">
+                        <a href="{{ '/the-executors/why-not-applying' | redirectUrl('/tasklist/review-and-confirm', '/summary/the-executors')}}">
+                            Change<span class="visuallyhidden">executors</span></a>
+                    </td>
+                </tr>
+                {% endif %}
 
 
 
