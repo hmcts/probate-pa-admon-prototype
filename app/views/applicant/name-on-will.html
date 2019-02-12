@@ -27,6 +27,11 @@
                     {{ data.applicantNameSameAsOnWill | checkedIf('No') }}>
                 <label for="applicantNameSameAsOnWillNo">No</label>
             </div>
+            <div class="multiple-choice" >
+                <input id="applicantNameSameAsOnWillNo" type="radio" name="applicantNameSameAsOnWill" value="No"
+                    {{ data.applicantNameSameAsOnWill | checkedIf('No') }}>
+                <label for="applicantNameSameAsOnWillNo">Name does not appear on the will</label>
+            </div>
 
         </fieldset>
     </div>
